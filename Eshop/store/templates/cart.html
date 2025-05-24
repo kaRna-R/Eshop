@@ -1,0 +1,38 @@
+<!-- templates/cart.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Your Cart</h3>
+
+    {% if cart_items %}
+        <ul class="list-group">
+            {% for item in cart_items %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <strong>{{ item.product.name }}</strong> 
+                            (x{{ item.quantity }})
+                        </div>
+                        <div>
+                            <span>${{ item.total_price }}</span>
+                            <form method="POST" action="{% url 'remove_from_cart' item.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+        <div class="d-flex justify-content-between">
+            <h4>Total Price: ${{ total_price }}</h4>
+            <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto pt-4">
+            <h3 class="alert alert-info border rounded">Create an Account</h3>
+
+            <!-- Displaying messages (success/error) -->
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" placeholder="John" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" placeholder="Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Phone Number</label>
+                    <input type="text" name="phone" id="phonenumber" class="form-control form-control-sm" placeholder="0123456789" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-sm" placeholder="email@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Create an Account</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
